@@ -6,7 +6,7 @@
 
 library("hemp")
 
-# one facet design
+# one facet design ----
 onefacet_mod <- lmer(Score ~ (1 | Participants) + (1 | Items),
     data = efData)
 onefacet <- gstudy(onefacet_mod)
