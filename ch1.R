@@ -1,5 +1,6 @@
 ## -------------------------------------------------------------------
-## Chapter 1 R code for the Handbook of Educational Measurement and Psychometrics Using R
+## Chapter 1 R code
+## Handbook of Educational Measurement and Psychometrics Using R
 ## C. D. Desjardins & O. Bulut
 ## -------------------------------------------------------------------
 
@@ -73,8 +74,8 @@ rse[2, 3:5]
 rse[2, c(3, 4, 5)]
 rse[4, "age"]
 rse$age[4]
-rse[rse$country == "TW",]
-rse[rse$country == "TW" & rse$age < 35,]
+rse[rse$country == "TW", ]
+rse[rse$country == "TW" & rse$age < 35, ]
 rse[rse$person == 424, "age"]
 rse[rse$person == 424, "age"] <- 35
 rse[rse$person == 424, "age"]
@@ -90,7 +91,7 @@ rse_wide <- reshape(data = rse_long,
                     idvar = "person",
                     timevar = "question",
                     v.names = "response")
-rse_long <- rse_long[order(rse_long$person, rse_long$question),]
+rse_long <- rse_long[order(rse_long$person, rse_long$question), ]
 head(rse_long)
 
 
@@ -132,10 +133,11 @@ stem(interest$vocab)
 library("lattice")
 xyplot(vocab ~ reading, data = interest)
 xyplot(vocab ~ reading | gender, data = interest)
-bwtheme <- standard.theme("pdf", color=FALSE)
+bwtheme <- standard.theme("pdf", color = FALSE)
 interest$gender_f <- ifelse(interest$gender == 1, "female", "male")
-xyplot(vocab ~ reading | gender_f, data = interest, col = "black", par.settings = list(strip.background = list(col = "white")))
-
+xyplot(vocab ~ reading | gender_f,
+    data = interest, col = "black",
+    par.settings = list(strip.background = list(col = "white")))
 
 # install packages used in the book ----
 install.packages("boot")
@@ -158,4 +160,3 @@ citation()
 citation("lattice")  # cite lattice
 toBibtex(citation())
 toBibtex(citation("lattice"))
-

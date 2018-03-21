@@ -1,5 +1,6 @@
 ## -------------------------------------------------------------------
-## Chapter 2 R code for the Handbook of Educational Measurement and Psychometrics Using R
+## Chapter 2 R code
+## Handbook of Educational Measurement and Psychometrics Using R
 ## C. D. Desjardins & O. Bulut
 ## -------------------------------------------------------------------
 
@@ -25,7 +26,7 @@ age_gender_table <- table(gender_nominal, age_ordinal)
 age_gender_df <- data.frame(age_gender_table)
 dotplot(age_ordinal ~ Freq | gender_nominal,
         age_gender_df, xlab = "Frequency", ylab = "Age", col = "black",
-        par.settings = list(strip.background=list(col="white")))
+        par.settings = list(strip.background = list(col = "white")))
 
 # descriptives and plots for ratio and interval scales ----
 summary(interest$vocab)
@@ -37,11 +38,13 @@ num_miss(SAPA)
 
 # split-half reliability
 split_half(SAPA, type = "alternate") # every other
-set.seed(1) 
-split_half(SAPA, type = "random") # random 
-split_half(SAPA, type = "alternate", sb = TRUE) # apply Spearman-Brown correction
+set.seed(1)
+split_half(SAPA, type = "random") # random
 
-# determine test length 
+# apply Spearman-Brown correction
+split_half(SAPA, type = "alternate", sb = TRUE)
+
+# determine test length
 test_length(SAPA, r = .95, r_type = "split")
 test_length(SAPA, r = .95, r_type = .862)
 
@@ -51,7 +54,8 @@ coef_alpha(SAPA)
 # bootstrapped 95% CIs for coefficient alpha
 library("boot")
 alpha_fun <- function(data, row){
-  coef_alpha(data[row, ])}
+  coef_alpha(data[row, ])
+}
 alpha_boot <- boot(SAPA, alpha_fun, R = 1e4)
 alpha_boot
 plot(alpha_boot)
@@ -75,7 +79,7 @@ round(item_diff, 3)
 total_score <- rowSums(SAPA)
 
 # discrimination
-item_discr <- cor(SAPA, total_score, 
+item_discr <- cor(SAPA, total_score,
                   use = "pairwise.complete.obs")
 item_discr
 
@@ -89,4 +93,3 @@ ivi(item = SAPA$reason.4, crit = SAPA$reason.17)
 # distractor functioning
 distractors <- distract(multiplechoice)
 head(distractors)
-
